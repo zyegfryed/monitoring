@@ -136,6 +136,10 @@ This is a test framework for virtual machine monitoring.
       <groupId>metrics-clojure</groupId>
       <artifactId>metrics-clojure</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.yammer.metrics</groupId>
+      <artifactId>metrics-ganglia</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
