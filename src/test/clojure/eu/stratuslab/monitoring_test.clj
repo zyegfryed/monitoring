@@ -11,9 +11,9 @@
 (deftest check-num-max-cpus-gauge
   (let [v (mc/value num-max-cpus)]
     (println "max cpus gauge: " v)
-    (is (= v 16))))
+    (is (pos? v))))
 
 (deftest check-num-active-cpus-gauge
   (let [v (mc/value num-active-cpus)]
     (println "active cpus gauge: " v)
-    (is (= v 16))))
+    (is (pos? v))))

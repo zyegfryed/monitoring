@@ -12,9 +12,9 @@
 (deftest check-num-max-cpus
   (let [v (virt/num-max-cpus test-url)]
     (println "max cpus: " v)
-    (is (= v 16))))
+    (is (pos? v))))
 
 (deftest check-num-active-cpus
   (let [v (virt/num-active-cpus test-url)]
     (println "active cpus: " v)
-    (is (= v 16))))
+    (is (pos? v))))
