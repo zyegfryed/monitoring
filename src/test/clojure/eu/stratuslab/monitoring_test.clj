@@ -3,10 +3,17 @@
   (:use clojure.test
         eu.stratuslab.monitoring))
 
-(deftest check-active-vms-gauge
-  (let [v (mc/value active-vms)]
-    (println v)
-    (println (mc/value active-vms))
-    (is (< v 20))
-    (is (pos? v))))
+(deftest check-num-active-domains-gauge
+  (let [v (mc/value num-active-domains)]
+    (println "active domains gauge: " v)
+    (is (= v 1))))
 
+(deftest check-num-max-cpus-gauge
+  (let [v (mc/value num-max-cpus)]
+    (println "max cpus gauge: " v)
+    (is (= v 16))))
+
+(deftest check-num-active-cpus-gauge
+  (let [v (mc/value num-active-cpus)]
+    (println "active cpus gauge: " v)
+    (is (= v 16))))
