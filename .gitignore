@@ -3,3 +3,4 @@ target
 tmp
 *.pyc
 .idea
+nosetests.xml

@@ -27,7 +27,6 @@ class VMUsageRecordTest(unittest.TestCase):
 
     def setUp(self):
         self.vmUsageRecord = VMUsageRecord.VMUsageRecord('test:///default')
-        pass
 
     def tearDown(self):
         pass
