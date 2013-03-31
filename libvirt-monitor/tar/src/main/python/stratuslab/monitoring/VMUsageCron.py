@@ -20,7 +20,7 @@ import sys
 sys.path.append('/var/lib/stratuslab/python')
 
 import os
-import logging
+import ConfigParser
 
 from stratuslab.logging import Util as LogUtil
 from stratuslab.monitoring.VMUsagePublisher import VMUsagePublisher
@@ -34,7 +34,7 @@ def _configure():
                  os.path.join(fsroot, 'etc', 'stratuslab', cfg_filename)]
 
     config = ConfigParser.ConfigParser()
-    config.set('vm_usage', 'host', 'localhost:8091')
+    config.add_section('vm_usage')
     config.set('vm_usage', 'bucket', 'default')
     config.set('vm_usage', 'password', '')
     used_cfg_files = config.read(cfg_paths)
