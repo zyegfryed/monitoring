@@ -121,7 +121,7 @@
                 <source>
                   <location>${project.build.directory}/zip-sources/etc</location>
                   <includes>
-                    <include>**/*.py</include>
+                    <include>**/*</include>
                   </includes>
                 </source>
               </sources>
