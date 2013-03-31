@@ -35,10 +35,23 @@ class VMUsagePublisher(object):
         return (docid, doc)
 
     def publish_all_usage_records(self):
-
+        """
+        Publish all VM usage records into the Couchbase database. This
+        function returns a tuple with the number records successfully
+        sent and the number not sent.
+        """
         records = self.vmUsageRecord.all_usage_records()
 
+        num_sent = 0
+        num_errors = 0
         for record in records:
-            docid, doc = self._docid_and_doc(record)
-            self.bucket.set(docid, 0, 0, doc)
+            try:
+                docid, doc = self._docid_and_doc(record)
+                self.bucket.set(docid, 0, 0, doc)
+                num_sent += 1
+            except Exception:
+                num_errors += 1
+                pass
+
+        return (num_sent, num_errors)
 

@@ -107,9 +107,25 @@
 
           <requires>
             <require>libvirt-python</require>
+            <require>stratuslab-api</require>
           </requires>
 
           <mappings>
+            <mapping>
+              <directory>/etc/</directory>
+              <directoryIncluded>false</directoryIncluded>
+              <filemode>644</filemode>
+              <username>root</username>
+              <groupname>root</groupname>
+              <sources>
+                <source>
+                  <location>${project.build.directory}/zip-sources/etc</location>
+                  <includes>
+                    <include>**/*.py</include>
+                  </includes>
+                </source>
+              </sources>
+            </mapping>
             <mapping>
               <directory>/var/lib/</directory>
               <directoryIncluded>false</directoryIncluded>
@@ -122,6 +138,9 @@
                   <includes>
                     <include>**/*.py</include>
                   </includes>
+                  <excludes>
+                    <exclude>stratuslab/__init__.py</exclude>
+                  </excludes>
                 </source>
               </sources>
             </mapping>
