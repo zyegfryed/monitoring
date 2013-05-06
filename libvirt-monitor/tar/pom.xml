@@ -6,7 +6,6 @@
 
   <groupId>eu.stratuslab.monitoring</groupId>
   <artifactId>libvirt-monitor-tar</artifactId>
-  <version>1.0-SNAPSHOT</version>
   <name>StratusLab Libvirt Monitor (TAR)</name>
 
   <description>
@@ -18,7 +17,7 @@ Tarball packaging of libvirt-monitor.
   <parent>
     <groupId>eu.stratuslab.monitoring</groupId>
     <artifactId>libvirt-monitor</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>13.05.0-SNAPSHOT</version>
   </parent>
 
   <profiles>
