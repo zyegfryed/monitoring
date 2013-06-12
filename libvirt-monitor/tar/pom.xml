@@ -14,7 +14,7 @@ Tarball packaging of libvirt-monitor.
   <parent>
     <groupId>eu.stratuslab.monitoring</groupId>
     <artifactId>libvirt-monitor</artifactId>
-    <version>13.05.0-RC2-SNAPSHOT</version>
+    <version>13.05.0.RC2-SNAPSHOT</version>
   </parent>
 
   <profiles>
