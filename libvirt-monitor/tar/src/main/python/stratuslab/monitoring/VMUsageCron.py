@@ -22,7 +22,7 @@ sys.path.append('/var/lib/stratuslab/python')
 import os
 import ConfigParser
 
-from stratuslab.logging import Util as LogUtil
+from stratuslab.api import LogUtil
 from stratuslab.monitoring.VMUsagePublisher import VMUsagePublisher
 
 cfg_filename = 'monitoring.cfg'
