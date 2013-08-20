@@ -30,7 +30,7 @@ class VMUsagePublisher(object):
 
     def _docid_and_doc(self, record):
         uuid = record['uuid']
-        docid = '%s/usage' % uuid
+        docid = 'Accounting/%s-T' % uuid
         doc = self.vmUsageRecord.as_json(record)
         return (docid, doc)
 

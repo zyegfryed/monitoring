@@ -1,6 +1,6 @@
 import sys
 sys.path.append('/var/lib/stratuslab/python')
-from stratuslab.monitoring.StratusAccountingCons import StratusAccountingCons
+from stratuslab.monitoring.StratusAccountingHistory import StratusAccountingHistory
 
 fedcloud_outputfile='0000000001'
 
@@ -8,9 +8,9 @@ fedcloud_outputfile='0000000001'
 
 
 
-sacc = StratusAccountingCons(host='onehost-2.lal.in2p3.fr')
+sacc = StratusAccountingHistory(host='onehost-2.lal.in2p3.fr')
 
-record_list=sacc.get_vms_usage_byview()
+record_list=sacc.get_vms_usage_history_byview()
 (num_sent, num_errors) = sacc.publish_history_usage_records(record_list)
 print "num_sent=", num_sent
 print "num_errors=", num_errors
