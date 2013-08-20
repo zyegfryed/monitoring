@@ -58,7 +58,7 @@ class StratusAccountingHistory(object):
         vm_usage=json.loads(self.get_vm_record(docid)[2])
   	return vm_usage
 
-    def get_vm_uuid(self, vmrecord):
+    def _get_vm_uuid(vmrecord):
         """
         Get VM uuid
         """
@@ -96,31 +96,6 @@ class StratusAccountingHistory(object):
 
 
 
-    def publish_history_usage_records(self, records, expiry=0):
-        """
-	Publish VM usage corresponding to Detlta_t to Couchbase database.
-	"""
- 
-	num_sent = 0
-        num_errors = 0
-        for record in records:
-            try:
-                docid, doc = self.docid_and_doc(record)
-                self.bucket.set(docid, expiry, 0, doc)
-                num_sent += 1
-            except Exception:
-                num_errors += 1
-                pass
-
-        return (num_sent, num_errors)
-
-		
-    def docid_and_doc(self, record):
-        uuid = record['uuid']
-        timest = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H:%M:%S')
-        docid =  'Accounting/%s-%s' % (uuid, timest)
-        doc = json.dumps(record, sort_keys=True, indent=4)
-        return (docid, doc)
 
     def print_vms_usage(self, record_list):
         for record in record_list:
