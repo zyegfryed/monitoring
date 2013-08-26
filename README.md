@@ -70,8 +70,11 @@ The map function:
 
 
 
-map_view = {"views":
-              {"by_id":
+map_view = 
+	
+	{"views":
+         
+	     {"by_id":
 
                {"map":
 
