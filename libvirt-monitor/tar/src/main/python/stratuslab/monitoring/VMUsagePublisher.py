@@ -13,9 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import time
+import datetime
 
 from stratuslab.monitoring import VMUsageRecord
-from couchbase.client import Couchbase
+from couchbase import Couchbase
 
 class VMUsagePublisher(object):
 
@@ -23,16 +25,16 @@ class VMUsagePublisher(object):
                  libvirt_url='qemu:///system',
                  host='127.0.0.1:8091', bucket='default', password=''):
 
-        self.client = Couchbase(host, bucket, password)
-        self.bucket = self.client[bucket]
+        self.cb = Couchbase.connect(host=host, bucket=bucket, password=password)
+        
 
         self.vmUsageRecord = VMUsageRecord.VMUsageRecord(libvirt_url)
 
-    def _docid_and_doc(self, record):
+    def _docid(self, record):
         uuid = record['uuid']
-        docid = 'Accounting/%s-T' % uuid
-        doc = self.vmUsageRecord.as_json(record)
-        return (docid, doc)
+	timest = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H:%M:%S')
+        docid =  'Accounting/%s/T' % uuid
+        return docid
 
     def publish_all_usage_records(self):
         """
@@ -46,8 +48,8 @@ class VMUsagePublisher(object):
         num_errors = 0
         for record in records:
             try:
-                docid, doc = self._docid_and_doc(record)
-                self.bucket.set(docid, 0, 0, doc)
+		uuid = self._docid(record)
+                self.cb.set(uuid, record, 0, 0)
                 num_sent += 1
             except Exception:
                 num_errors += 1
