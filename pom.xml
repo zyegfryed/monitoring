@@ -21,7 +21,8 @@ Utilities for monitoring cloud resource utilization.
   </parent>
 
   <modules>
-    <module>libvirt-monitor</module>
+    <module>vmusage</module>
+    <module>consolidation</module>
   </modules>
 
   <issueManagement>

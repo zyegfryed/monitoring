@@ -1,0 +1,29 @@
+<assembly>
+  <id>consolidation</id>
+  
+  <includeBaseDirectory>false</includeBaseDirectory>
+  
+  <formats>
+    <format>tar.gz</format>
+    <format>zip</format>
+  </formats>
+  
+  <fileSets>
+    
+    <fileSet>
+      <directory>src/main/python</directory>
+      <outputDirectory>lib/stratuslab/python</outputDirectory>
+      <fileMode>0644</fileMode>
+      <directoryMode>0755</directoryMode>
+    </fileSet>
+    
+    <fileSet>
+      <directory>src/main/cfg</directory>
+      <outputDirectory></outputDirectory>
+      <fileMode>0644</fileMode>
+      <directoryMode>0755</directoryMode>
+    </fileSet>
+    
+  </fileSets>
+  
+</assembly>

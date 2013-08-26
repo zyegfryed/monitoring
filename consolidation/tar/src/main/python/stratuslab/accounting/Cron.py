@@ -23,7 +23,7 @@ import os
 import ConfigParser
 
 from stratuslab.api import LogUtil
-from stratuslab.monitoring.StratusAccountingHistoryPublish import StratusAccountingHistoryPublish
+from stratuslab.accounting.ConsolidationPublish import ConsolidationPublish
 
 expiry = 0
 
@@ -56,17 +56,17 @@ if not host:
 logger.debug('starting VM usage history publishing')
 
 try:
-    accountingHistoryPublish = StratusAccountingHistoryPublish(host=host)
+    accountingConsolidationPublish = ConsolidationPublish(host=host)
     logger.debug('publishing VM usage history to %s' % host)
 except Exception as e:
-    logger.error('error creating StratusAccountingHistoryPublish: %s' % str(e))
+    logger.error('error creating ConsolidationPublish: %s' % str(e))
     sys.exit(1)
 
 try:
-    (num_sent, num_errors) = accountingHistoryPublish.publish_history_usage_records(expiry)
+    (num_sent, num_errors) = accountingConsolidationPublish.publish_consolidation_usage_records(expiry)
     logger.info('published %d VM usage records to %s; %d errors' % (num_sent, host, num_errors))
 except Exception as e:
     logger.error('error publishing VM usage records history: %s' % str(e))
     sys.exit(1)
 
-logger.debug('finished VM usage history publishing')
+logger.debug('finished VM usage Consolidation publishing')

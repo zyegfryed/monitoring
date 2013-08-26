@@ -1,0 +1,1 @@
+*/5 * * * * root /var/lib/stratuslab/python/stratuslab/monitoring/vm/Cron.py

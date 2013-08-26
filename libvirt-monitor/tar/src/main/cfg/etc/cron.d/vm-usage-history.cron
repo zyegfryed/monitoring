@@ -1,1 +1,0 @@
-* */2 * * * root /var/lib/stratuslab/python/stratuslab/monitoring/VMUsageHistoryCron.py

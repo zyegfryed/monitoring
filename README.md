@@ -3,8 +3,10 @@ Cloud Monitoring
 ================
 
 This repository contains the probes and surrounding utilities to
-monitor cloud resource utilization. 
+monitor and consolidate cloud resource utilization. 
 
+vmusage code monitor cloud resource utilization.
+consolidation code consolidate cloud resource utilization.
 
 Prerequisites
 =============
@@ -13,7 +15,7 @@ Maven and java are both required to build and test the code.  Install
 a certified version of a java virtual machine (1.7 or later) and
 maven. 
 
-The code also requires that libvirt be available on the build machine.
+vmusage code requires that libvirt be available on the build machine.
 This can be installed via your machine's packaging system or
 manually.  On Mac OSX, homebrew can be used to install libvirt.
 
@@ -46,6 +48,30 @@ Install the code via the RPM packages.  There are (or will be)
 separate packages for each type of resource.  For example a package
 that will be installed on 'host' machines to monitor VM resource
 utilization. 
+
+
+View in consolidation code
+==========================
+In consolidation code we are using view to get documents from couchbase database.
+view defined to get all documents by docid, where docid match the format "Accounting/..."
+Querying view performed using REST API endpoint
+Method  GET /bucket/_design/design-doc/_view/view-name
+Method  PUT /bucket/_design/design-doc
+Method  DELETE /bucket/_design/design-doc/_view/view-name
+In the consolidation code: bucket='default', design-doc='dev_byid', and view-name='by_id'
+The map function:
+map_view = {"views":
+              {"by_id":
+               {"map":
+                '''function (doc, meta) {
+                     if (meta.id.indexOf("Accounting") == 0)
+                        {
+                                emit(meta.id, null);
+                        }
+                   }'''
+                },
+               }
+              }
 
 
 License

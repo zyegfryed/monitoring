@@ -3,23 +3,23 @@ import time
 import datetime
 import json
 from couchbase import Couchbase
-from stratuslab.monitoring import StratusAccountingHistory
+from stratuslab.accounting import Consolidation
 
-class StratusAccountingHistoryPublish(object):
+class ConsolidationPublish(object):
 
     def __init__(self,
                  uuid, host='127.0.0.1', bucket='default', password=''):
         
         self.cb = Couchbase.connect(host=host, bucket=bucket, password=password)
 
-	self.vmUsageHistory = StratusAccountingHistory.StratusAccountingHistory(self.cb,uuid)
+	self.vmUsageConsolidation = Consolidation.Consolidation(self.cb,uuid)
 
 
-    def publish_history_usage_records(self,  expiry=0):
+    def publish_consolidation_usage_records(self,  expiry=0):
         """
 	Publish VM usage corresponding to Detlta_t to Couchbase database.
 	"""
-	record= self.vmUsageHistory.get_vms_usage_history_byview() 
+	record= self.vmUsageConsolidation.get_vms_usage_consolidation_byview() 
 	print "record_to_publish=", record
 	num_sent = 0
         num_errors = 0

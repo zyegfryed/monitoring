@@ -29,9 +29,9 @@ design_doc='dev_byid'
 view_name='by_id'
 
 
-class StratusAccountingHistory(object):
+class Consolidation(object):
     """
-    StratusAccountHistory Class for storing  VMUsage history at instant t. VMUsage(t) = VMUsage(T)-VMUsage(t-1).
+    Consolidation Class for storing  VMUsage consolidation at instant t. VMUsage(t) = VMUsage(T)-VMUsage(t-1).
     Where VMUsage(T) corresponds to VM total usage, and VMUsage(t-1) the last known VMUsage.
     VMUsage are stored to the Couchbase database.
     An expiry time could be used for VMUsage.
@@ -44,9 +44,10 @@ class StratusAccountingHistory(object):
 
 
  
-    def get_vms_usage_history_byview(self):
+    def get_vms_usage_consolidation_byview(self):
         """
-        Retrieve all VM usage history, in respect of by_view, from the Couchbase database. 
+        Retrieve all VM usage, in respect of by_view, from the Couchbase database. 
+
 	All VM usage corresponding to Detlta_t will be computed and returned in as a list. 
         """
         
