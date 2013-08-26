@@ -53,25 +53,46 @@ utilization.
 View in consolidation code
 ==========================
 In consolidation code we are using view to get documents from couchbase database.
+
 view defined to get all documents by docid, where docid match the format "Accounting/..."
+
 Querying view performed using REST API endpoint
+
 Method  GET /bucket/_design/design-doc/_view/view-name
+
 Method  PUT /bucket/_design/design-doc
+
 Method  DELETE /bucket/_design/design-doc/_view/view-name
+
 In the consolidation code: bucket='default', design-doc='dev_byid', and view-name='by_id'
+
 The map function:
+
 map_view = {"views":
+
               {"by_id":
+
                {"map":
+
                 '''function (doc, meta) {
+
                      if (meta.id.indexOf("Accounting") == 0)
+
                         {
+
                                 emit(meta.id, null);
+
                         }
+
                    }'''
+
                 },
+
+
                }
+
               }
+
 
 
 License
