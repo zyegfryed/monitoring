@@ -68,6 +68,7 @@ In the consolidation code: bucket='default', design-doc='dev_byid', and view-nam
 
 The map function:
 
+
 map_view = {"views":
 
               {"by_id":
@@ -84,7 +85,8 @@ map_view = {"views":
 
                         }
 
-                   }'''
+                   }
+		'''
 
                 },
 
