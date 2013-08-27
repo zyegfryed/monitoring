@@ -1,5 +1,4 @@
 import sys
-sys.path.append('/var/lib/stratuslab/python')
 from couchbase import Couchbase
 from couchbase.views.iterator import View
 from couchbase.views.params import Query
@@ -101,4 +100,21 @@ class Consolidation(object):
 
 
 
+    def publish_consolidation_usage_records(self,  expiry=0):
+        """
+        Publish VM usage corresponding to Detlta_t to Couchbase database.
+        """
+        record= self.get_vms_usage_consolidation_byview()
+        try:
+            docid = self._docid(record)
+            self.cb.set(docid, record, 0, expiry)
+        except Exception:
+            pass
 
+
+
+    def _docid(self, record):
+        uuid = record['uuid']
+        timest = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H:%M:%S')
+        docid =  'Accounting/%s/%s' % (uuid, timest)
+        return docid

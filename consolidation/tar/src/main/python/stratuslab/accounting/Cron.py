@@ -26,7 +26,6 @@ from stratuslab.api import LogUtil
 from stratuslab.accounting.ConsolidationPublish import ConsolidationPublish
 
 expiry = 0
-
 cfg_filename = 'monitoring.cfg'
 
 def _configure():
@@ -54,17 +53,16 @@ if not host:
     sys.exit(0)
 
 logger.debug('starting VM usage history publishing')
-
 try:
-    accountingConsolidationPublish = ConsolidationPublish(host=host)
-    logger.debug('publishing VM usage history to %s' % host)
+    aCP = ConsolidationPublish(host=host)
+    logger.debug('publishing VMs usage history to %s' % host)
 except Exception as e:
     logger.error('error creating ConsolidationPublish: %s' % str(e))
     sys.exit(1)
 
 try:
-    (num_sent, num_errors) = accountingConsolidationPublish.publish_consolidation_usage_records(expiry)
-    logger.info('published %d VM usage records to %s; %d errors' % (num_sent, host, num_errors))
+    (num_sent, num_errors) = aCP.publish_all_consolidation_usage_records(expiry)
+    logger.info('published %d VMs usage records to %s; %d errors' % (num_sent, host, num_errors))
 except Exception as e:
     logger.error('error publishing VM usage records history: %s' % str(e))
     sys.exit(1)

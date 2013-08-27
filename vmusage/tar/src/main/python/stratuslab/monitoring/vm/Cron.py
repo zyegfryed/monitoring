@@ -23,7 +23,7 @@ import os
 import ConfigParser
 
 from stratuslab.api import LogUtil
-from stratuslab.monitoring.UsagePublisher import UsagePublisher
+from stratuslab.monitoring.vm.UsagePublisher import UsagePublisher
 
 cfg_filename = 'monitoring.cfg'
 
@@ -54,7 +54,7 @@ if not host:
 logger.debug('starting VM usage publishing')
 
 try:
-    vmUsagePublisher = UsagePublisher(host=host)
+    vmUsagePublisher = UsagePublisher.UsagePublisher(host=host)
     logger.debug('publishing VM usage to %s' % host)
 except Exception as e:
     logger.error('error creating UsagePublisher: %s' % str(e))

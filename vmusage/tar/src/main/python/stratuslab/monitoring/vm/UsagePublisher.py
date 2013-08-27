@@ -16,7 +16,7 @@
 import time
 import datetime
 
-from stratuslab.monitoring import UsageRecord
+from stratuslab.monitoring.vm import UsageRecord
 from couchbase import Couchbase
 
 class UsagePublisher(object):
