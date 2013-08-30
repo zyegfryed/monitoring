@@ -50,33 +50,35 @@ map_view = {"views":
 
 
 
-def _create_view(design_doc,mapview,host='localhost',bucket='default'):
-    """
-    Create view using REST API calls
-    """
-    view_url='http://%s:8092/%s/_design/%s' % (host,bucket,design_doc)
-    data=json.dumps(self.mapview)
-    headers = {'content-type': 'application/json'}
-    r = requests.put(view_url, data=data, headers=headers)
-    print r.text
-
-
-def _delete_view(design_doc,host='localhost',bucket='default'):
-    """
-    Delete view using REST API calls
-    """
-    view_url='http://%s:8092/%s/_design/%s' % (self.host,self.bucket,self.design_doc)
-    headers = {'content-type': 'application/json'}
-    r = requests.delete(view_url, headers=headers)
-    print r.text
-
 class ConsolidationPublishTest(unittest.TestCase):
 
     def setUp(self):
-	_create_view('dev_byid',map_view)
-	_create_view('dev_byuuid',map_view2)
+        self.create_view('dev_byid', map_view)
+        self.create_view('dev_byuuid',map_view2)
 
     def tearDown(self):
         pass
+
+    def create_view(self, design_doc,mapview,host='localhost',bucket='default'):
+        """
+        Create view using REST API calls
+        """
+        view_url='http://%s:8092/%s/_design/%s' % (host,bucket,design_doc)
+        print "view_url=", view_url
+        data=json.dumps(mapview)
+        headers = {'content-type': 'application/json'}
+        r = requests.put(view_url, data=data, headers=headers)
+        print r.text
+
+
+    def delete_view(self, design_doc,host='localhost',bucket='default'):
+        """
+        Delete view using REST API calls
+        """
+        view_url='http://%s:8092/%s/_design/%s' % (self.host,self.bucket,self.design_doc)
+        headers = {'content-type': 'application/json'}
+        r = requests.delete(view_url, headers=headers)
+        print r.text
+
 
 
