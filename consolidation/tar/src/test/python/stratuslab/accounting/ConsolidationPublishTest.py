@@ -13,22 +13,70 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
+import json
+import requests
 import unittest
-from stratuslab.accounting import ConsolidationPublish
 
-vm_uuid=''
-expiry=60
+
+
+map_view2 = {"views":
+              {"by_runningvms":
+               {"map":
+                '''function (doc, meta) {
+                     if (meta.id.indexOf("Accounting") == 0 && doc.state == "running")
+                        {
+                                emit(doc.uuid, null);
+                        }
+                   }'''
+                },
+               }
+              }
+
+
+
+map_view = {"views":
+              {"by_id":
+               {"map":
+                '''function (doc, meta) {
+                     if (meta.id.indexOf("Accounting") == 0)
+                        {
+                                emit(meta.id, null);
+                        }
+                   }'''
+                },
+               }
+              }
+
+
+
+
+def _create_view(design_doc,mapview,host='localhost',bucket='default'):
+    """
+    Create view using REST API calls
+    """
+    view_url='http://%s:8092/%s/_design/%s' % (host,bucket,design_doc)
+    data=json.dumps(self.mapview)
+    headers = {'content-type': 'application/json'}
+    r = requests.put(view_url, data=data, headers=headers)
+    print r.text
+
+
+def _delete_view(design_doc,host='localhost',bucket='default'):
+    """
+    Delete view using REST API calls
+    """
+    view_url='http://%s:8092/%s/_design/%s' % (self.host,self.bucket,self.design_doc)
+    headers = {'content-type': 'application/json'}
+    r = requests.delete(view_url, headers=headers)
+    print r.text
 
 class ConsolidationPublishTest(unittest.TestCase):
 
     def setUp(self):
-        self.vmUsageConsolidation = ConsolidationPublish.ConsolidationPublish(vm_uuid, host='localhost')
+	_create_view('dev_byid',map_view)
+	_create_view('dev_byuuid',map_view2)
 
     def tearDown(self):
         pass
 
-    def test_publish_all(self):
-	(num_sent, num_errors) = self.vmUsageConsolidation.publish_consolidation_usage_records(expiry)
-	print "num_sent=", num_sent
-	print "num_errors=", num_errors
+
