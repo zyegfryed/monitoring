@@ -23,7 +23,7 @@ import os
 import ConfigParser
 
 from stratuslab.api import LogUtil
-from stratuslab.monitoring.vm.UsagePublisher import UsagePublisher
+from stratuslab.monitoring.vm import UsagePublisher
 
 cfg_filename = 'monitoring.cfg'
 
