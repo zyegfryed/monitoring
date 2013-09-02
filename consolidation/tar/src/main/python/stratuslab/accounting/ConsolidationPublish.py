@@ -24,7 +24,7 @@ map_view = {"views":
 
 
 view_name='by_runningvms'
-design_doc='dev_byuuid'
+design_doc='dev_stratuslab'
 
 class ConsolidationPublish(object):
 

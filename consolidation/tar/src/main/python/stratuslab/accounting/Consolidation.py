@@ -9,7 +9,7 @@ Querying views will be performed using REST API endpoint
 Method	GET /bucket/_design/design-doc/_view/view-name
 Method	PUT /bucket/_design/design-doc
 Method	DELETE /bucket/_design/design-doc/_view/view-name
-Below: bucket='default', design-doc='dev_byid', and view-name='by_id' 
+Below: bucket='default', design-doc='dev_stratuslab', and view-name='by_id' 
 """
 mapreduce_view = {"views":
               {"by_id":
@@ -24,7 +24,7 @@ mapreduce_view = {"views":
                }
               }
 
-design_doc='dev_byid'
+design_doc='dev_stratuslab'
 view_name='by_id'
 
 
