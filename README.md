@@ -64,7 +64,7 @@ Method  PUT /bucket/_design/design-doc
 
 Method  DELETE /bucket/_design/design-doc/_view/view-name
 
-In the consolidation code: bucket='default', design-doc='dev_byid', and view-name='by_id'
+In the consolidation code: bucket='default', design-doc='dev_stratuslab', and view-name='by_id'
 
 The map function:
 
