@@ -22,12 +22,9 @@ from stratuslab.monitoring.vm import UsageRecord
 
 class UsagePublisher(object):
 
-    def __init__(self, libvirt_url='qemu:///system', host='127.0.0.1:8091',
-                 bucket='default', password=''):
-
-        self.cb = Couchbase.connect(
-            host=host, bucket=bucket, password=password)
-
+    def __init__(self, libvirt_url='qemu:///system', bucket='default',
+                 **kwargs):
+        self.cb = Couchbase.connect(bucket=bucket, **kwargs)
         self.vmUsageRecord = UsageRecord.UsageRecord(libvirt_url)
 
     def _docid(self, record):
