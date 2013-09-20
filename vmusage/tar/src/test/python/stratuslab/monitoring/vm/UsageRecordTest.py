@@ -14,14 +14,15 @@
 # limitations under the License.
 #
 
-import unittest
 import json
+import unittest
 from stratuslab.monitoring.vm import UsageRecord
 
 EXPECTED_FIELDS = set(['name', 'uuid',
                        'vcpu', 'memory', 'cpu_time', 'state',
                        'net_rx', 'net_tx',
                        'disk_read', 'disk_written'])
+
 
 class UsageRecordTest(unittest.TestCase):
 

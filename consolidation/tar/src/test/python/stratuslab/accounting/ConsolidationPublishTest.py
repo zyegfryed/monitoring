@@ -18,67 +18,62 @@ import requests
 import unittest
 
 
+map_view2 = {
+    "views": {
+        "by_runningvms": {
+            "map":
+'''
+function (doc, meta) {
+    if (meta.id.indexOf("Accounting") == 0 && doc.state == "running") {
+        emit(doc.uuid, null);
+    }
+}
+'''
+        },
+    }
+}
 
-map_view2 = {"views":
-              {"by_runningvms":
-               {"map":
-                '''function (doc, meta) {
-                     if (meta.id.indexOf("Accounting") == 0 && doc.state == "running")
-                        {
-                                emit(doc.uuid, null);
-                        }
-                   }'''
-                },
-               }
-              }
-
-
-
-map_view = {"views":
-              {"by_id":
-               {"map":
-                '''function (doc, meta) {
-                     if (meta.id.indexOf("Accounting") == 0)
-                        {
-                                emit(meta.id, null);
-                        }
-                   }'''
-                },
-               }
-              }
-
-
+map_view = {
+    "views": {
+        "by_id": {
+            "map":
+'''
+function (doc, meta) {
+    if (meta.id.indexOf("Accounting") == 0) {
+        emit(meta.id, null);
+    }
+}
+'''
+        },
+    }
+}
 
 
 class ConsolidationPublishTest(unittest.TestCase):
 
     def setUp(self):
         self.create_view('dev_byid', map_view)
-        self.create_view('dev_byuuid',map_view2)
+        self.create_view('dev_byuuid', map_view2)
 
     def tearDown(self):
         pass
 
-    def create_view(self, design_doc,mapview,host='localhost',bucket='default'):
+    def create_view(self, design_doc, mapview, host='localhost',
+                    bucket='default'):
         """
         Create view using REST API calls
         """
-        view_url='http://%s:8092/%s/_design/%s' % (host,bucket,design_doc)
-        print "view_url=", view_url
-        data=json.dumps(mapview)
+        view_url = 'http://%s:8092/%s/_design/%s' % (host, bucket, design_doc)
+        data = json.dumps(mapview)
         headers = {'content-type': 'application/json'}
         r = requests.put(view_url, data=data, headers=headers)
         print r.text
 
-
-    def delete_view(self, design_doc,host='localhost',bucket='default'):
+    def delete_view(self, design_doc, host='localhost', bucket='default'):
         """
         Delete view using REST API calls
         """
-        view_url='http://%s:8092/%s/_design/%s' % (self.host,self.bucket,self.design_doc)
+        view_url = 'http://%s:8092/%s/_design/%s' % (host, bucket, design_doc)
         headers = {'content-type': 'application/json'}
         r = requests.delete(view_url, headers=headers)
         print r.text
-
-
-

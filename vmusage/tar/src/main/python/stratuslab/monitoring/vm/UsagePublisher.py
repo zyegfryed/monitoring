@@ -16,24 +16,25 @@
 import time
 import datetime
 
-from stratuslab.monitoring.vm import UsageRecord
 from couchbase import Couchbase
+from stratuslab.monitoring.vm import UsageRecord
+
 
 class UsagePublisher(object):
 
-    def __init__(self,
-                 libvirt_url='qemu:///system',
-                 host='127.0.0.1:8091', bucket='default', password=''):
+    def __init__(self, libvirt_url='qemu:///system', host='127.0.0.1:8091',
+                 bucket='default', password=''):
 
-        self.cb = Couchbase.connect(host=host, bucket=bucket, password=password)
-        
+        self.cb = Couchbase.connect(
+            host=host, bucket=bucket, password=password)
 
         self.vmUsageRecord = UsageRecord.UsageRecord(libvirt_url)
 
     def _docid(self, record):
         uuid = record['uuid']
-	timest = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H:%M:%S')
-        docid =  'Accounting/%s/T' % uuid
+        timest = datetime.datetime.fromtimestamp(
+            time.time()).strftime('%Y-%m-%d-%H:%M:%S')
+        docid = 'Accounting/%s/T' % uuid
         return docid
 
     def publish_all_usage_records(self):
@@ -48,7 +49,7 @@ class UsagePublisher(object):
         num_errors = 0
         for record in records:
             try:
-		uuid = self._docid(record)
+                uuid = self._docid(record)
                 self.cb.set(uuid, record, 0, 0)
                 num_sent += 1
             except Exception:
@@ -56,4 +57,3 @@ class UsagePublisher(object):
                 pass
 
         return (num_sent, num_errors)
-

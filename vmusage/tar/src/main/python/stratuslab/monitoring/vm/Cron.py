@@ -27,10 +27,12 @@ from stratuslab.monitoring.vm import UsagePublisher
 
 cfg_filename = 'monitoring.cfg'
 
+
 def _configure():
     fsroot = os.path.splitdrive(sys.executable)[0] or '/'
     cfg_paths = [os.path.join(os.getcwd(), cfg_filename),
-                 os.path.join(os.path.expanduser('~'), '.stratuslab', cfg_filename),
+                 os.path.join(
+                     os.path.expanduser('~'), '.stratuslab', cfg_filename),
                  os.path.join(fsroot, 'etc', 'stratuslab', cfg_filename)]
 
     config = ConfigParser.ConfigParser()
@@ -62,7 +64,8 @@ except Exception as e:
 
 try:
     (num_sent, num_errors) = vmUsagePublisher.publish_all_usage_records()
-    logger.info('published %d VM usage records to %s; %d errors' % (num_sent, host, num_errors))
+    logger.info('published %d VM usage records to %s; %d errors' %
+                (num_sent, host, num_errors))
 except Exception as e:
     logger.error('error publishing VM usage records: %s' % str(e))
     sys.exit(1)

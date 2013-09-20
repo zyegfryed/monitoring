@@ -17,10 +17,12 @@
 import unittest
 from stratuslab.monitoring.vm import UsagePublisher
 
+
 class UsagePublisherTest(unittest.TestCase):
 
     def setUp(self):
-        self.vmUsagePublisher = UsagePublisher.UsagePublisher(libvirt_url='test:///default')
+        self.vmUsagePublisher = UsagePublisher.UsagePublisher(
+            libvirt_url='test:///default')
 
     def tearDown(self):
         pass

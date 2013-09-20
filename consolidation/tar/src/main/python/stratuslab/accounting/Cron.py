@@ -28,10 +28,12 @@ from stratuslab.accounting.ConsolidationPublish import ConsolidationPublish
 expiry = 0
 cfg_filename = 'monitoring.cfg'
 
+
 def _configure():
     fsroot = os.path.splitdrive(sys.executable)[0] or '/'
     cfg_paths = [os.path.join(os.getcwd(), cfg_filename),
-                 os.path.join(os.path.expanduser('~'), '.stratuslab', cfg_filename),
+                 os.path.join(
+                     os.path.expanduser('~'), '.stratuslab', cfg_filename),
                  os.path.join(fsroot, 'etc', 'stratuslab', cfg_filename)]
 
     config = ConfigParser.ConfigParser()
@@ -62,7 +64,8 @@ except Exception as e:
 
 try:
     (num_sent, num_errors) = aCP.publish_all_consolidation_usage_records(expiry)
-    logger.info('published %d VMs usage records to %s; %d errors' % (num_sent, host, num_errors))
+    logger.info('published %d VMs usage records to %s; %d errors' %
+                (num_sent, host, num_errors))
 except Exception as e:
     logger.error('error publishing VM usage records history: %s' % str(e))
     sys.exit(1)

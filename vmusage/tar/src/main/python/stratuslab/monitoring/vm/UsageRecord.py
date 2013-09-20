@@ -14,19 +14,22 @@
 # limitations under the License.
 #
 
+import json
 import libvirt
 import xml.etree.ElementTree as ET
-import json
 
-_STATE_NAMES = {0: 'undefined',
-                1: 'running',
-                2: 'blocked',
-                3: 'paused',
-                4: 'shutdown',
-                5: 'shutoff',
-                6: 'crashed',
-                7: 'pmsuspended',
-                8: 'last'}
+VM_STATES = {
+    0: 'undefined',
+    1: 'running',
+    2: 'blocked',
+    3: 'paused',
+    4: 'shutdown',
+    5: 'shutoff',
+    6: 'crashed',
+    7: 'pmsuspended',
+    8: 'last',
+}
+
 
 class UsageRecord(object):
 
@@ -71,10 +74,12 @@ class UsageRecord(object):
         'vcpu', and 'cpu_time' (in seconds).
         """
         (state, maxMem_kb, memory_kb, vcpu, cpu_time_ns) = dom.info()
-        return {'state': _STATE_NAMES[state],
-                'memory' : memory_kb * 1000L,
-                'vcpu': vcpu,
-                'cpu_time': cpu_time_ns/1000000000L}
+        return {
+            'state': VM_STATES[state],
+            'memory' : memory_kb * 1000L,
+            'vcpu': vcpu,
+            'cpu_time': cpu_time_ns/1000000000L
+        }
 
     @staticmethod
     def _dom_xml_info(dom):
