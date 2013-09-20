@@ -3,7 +3,7 @@ Cloud Monitoring
 ================
 
 This repository contains the probes and surrounding utilities to
-monitor and consolidate cloud resource utilization. 
+monitor and consolidate cloud resource utilization.
 
 vmusage code monitor cloud resource utilization.
 consolidation code consolidate cloud resource utilization.
@@ -13,7 +13,7 @@ Prerequisites
 
 Maven and java are both required to build and test the code.  Install
 a certified version of a java virtual machine (1.7 or later) and
-maven. 
+maven.
 
 vmusage code requires that libvirt be available on the build machine.
 This can be installed via your machine's packaging system or
@@ -47,7 +47,7 @@ Installation
 Install the code via the RPM packages.  There are (or will be)
 separate packages for each type of resource.  For example a package
 that will be installed on 'host' machines to monitor VM resource
-utilization. 
+utilization.
 
 
 View in consolidation code
@@ -70,10 +70,10 @@ The map function:
 
 
 
-map_view = 
-	
+map_view =
+
 	{"views":
-         
+
 	     {"by_id":
 
                {"map":
