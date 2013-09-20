@@ -1,26 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>eu.stratuslab.monitoring</groupId>
   <artifactId>consolidation</artifactId>
   <name>StratusLab Accounting Consolidation (POM)</name>
-
-  <description>
-StratusLab Accounting Consolidation utilities.
-</description>
-
+  <description>StratusLab Accounting Consolidation utilities.</description>
   <packaging>pom</packaging>
-
   <parent>
     <groupId>eu.stratuslab.monitoring</groupId>
     <artifactId>monitoring</artifactId>
     <version>13.10.0-SNAPSHOT</version>
   </parent>
-
   <modules>
     <module>tar</module>
   </modules>
-
   <profiles>
     <profile>
       <id>build-rpm</id>
@@ -34,5 +26,4 @@ StratusLab Accounting Consolidation utilities.
       </modules>
     </profile>
   </profiles>
-
 </project>

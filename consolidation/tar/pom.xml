@@ -1,70 +1,59 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>eu.stratuslab.monitoring</groupId>
   <artifactId>consolidation-tar</artifactId>
   <name>StratusLab Accounting Consolidation (TAR)</name>
-
-  <description>
-Tarball packaging of consolidation.
-</description>
-
+  <description>Tarball packaging of consolidation.</description>
   <packaging>pom</packaging>
-
   <parent>
     <groupId>eu.stratuslab.monitoring</groupId>
     <artifactId>consolidation</artifactId>
     <version>13.10.0-SNAPSHOT</version>
   </parent>
-
   <profiles>
     <profile>
       <id>nosetests</id>
       <activation>
-	<property>
-	  <name>NOSETESTS</name>
-	</property>
+        <property>
+          <name>NOSETESTS</name>
+        </property>
       </activation>
       <build>
-	<plugins>
-	  <plugin>
-	    <groupId>org.codehaus.mojo</groupId>
-	    <artifactId>exec-maven-plugin</artifactId>
-	    <executions>
-	      <execution>
-		<id>python-test</id>
-		<phase>test</phase>
-		<goals>
-		  <goal>exec</goal>
-		</goals>
-
-		<configuration>
-		  <executable>nosetests</executable>
-		  <workingDirectory>${basedir}/src/test/python/</workingDirectory>
-		  <arguments>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>python-test</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>nosetests</executable>
+                  <workingDirectory>${basedir}/src/test/python/</workingDirectory>
+                  <arguments>
                     <argument>-c</argument>
-		    <argument>nosetests.ini</argument>
-		  </arguments>
-		  <environmentVariables>
-		    <PYTHONPATH>${basedir}/src/main/python:/usr/local/lib/python2.7/site-packages/</PYTHONPATH>
-		  </environmentVariables>
-		</configuration>
-	      </execution>
-	    </executions>
-	  </plugin>
-	</plugins>
+                    <argument>nosetests.ini</argument>
+                  </arguments>
+                  <environmentVariables>
+                    <PYTHONPATH>${basedir}/src/main/python:/usr/local/lib/python2.7/site-packages/</PYTHONPATH>
+                  </environmentVariables>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
       </build>
     </profile>
   </profiles>
-
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        
         <executions>
-          
           <execution>
             <id>consolidation-bundle</id>
             <goals>
@@ -78,11 +67,8 @@ Tarball packaging of consolidation.
               </descriptors>
             </configuration>
           </execution>
-          
         </executions>
-        
       </plugin>
     </plugins>
   </build>
-
 </project>
